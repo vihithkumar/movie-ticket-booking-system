@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Register</title>
+    <style>
+        /* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #44117b;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://images.adsttc.com/media/images/5f7d/fef2/63c0/170a/9100/0273/large_jpg/Jiangnan_Photography.jpg?1602092773');
+    background-size: contain; /* Fit the entire image within the background */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center; /* Center the image */
+    height: 100vh; /* Full viewport height */
+}
+
+.container {
+    width: 300px;
+    margin: 100px auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+p {
+    text-align: center;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+    
+
+    <div class="container">
+        <!-- Choose Login Type -->
+        <div id="login-choice">
+            <h2>Login as</h2>
+            <button id="user-login-btn">User Login</button></p>
+            <button id="admin-login-btn">Admin Login</button>
+            <p>Don't have an account? <a href="#" id="switch-to-register">Register Here</a></p>
+        </div>
+
+        <!-- User Login Form -->
+        <div id="user-login-box" style="display: none;">
+            <h2>User Login</h2>
+            <form id="user-login-form">
+                <div class="input-group">
+                    <label for="user-login-email">Email:</label>
+                    <input type="email" id="user-login-email" required>
+                </div>
+                <div class="input-group">
+                    <label for="user-login-password">Password:</label>
+                    <input type="password" id="user-login-password" required>
+                </div>
+                <a href="user dashboard.html">
+                <button onclick="window.location.href='user dashboard.html';">Login as User</button>
+            </a>
+            </form>
+            <p><a href="#" id="back-to-choice-user">Back</a></p>
+        </div>
+
+        <!-- Admin Login Form -->
+        <div id="admin-login-box" style="display: none;">
+            <h2>Admin Login</h2>
+            <form id="admin-login-form">
+                <div class="input-group">
+                    <label for="admin-login-email">Email:</label>
+                    <input type="email" id="admin-login-email" required>
+                </div>
+                <div class="input-group">
+                    <label for="admin-login-password">Password:</label>
+                    <input type="password" id="admin-login-password" required>
+                </div>
+                <a href="admin page.html">
+                <button onclick="window.location.href='admin page.html';">Login as Admin</button>
+                </a>
+            </form>
+            <p><a href="#" id="back-to-choice-admin">Back</a></p>
+        </div>
+
+        <!-- Register Form -->
+        <div id="register-box" style="display: none;">
+            <h2>Register</h2>
+            <form id="register-form">
+                <div class="input-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="input-group">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" required>
+                </div>
+                <div class="input-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="input-group">
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="input-group">
+                    <label for="register-password">Create Password:</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+            <p>Already have an account? <a href="#" id="switch-to-login">Login Here</a></p>
+        </div>
+    </div>
+
+    <script>
+
+
+        // script.js
+
+// Show User Login Form
+document.getElementById('user-login-btn').addEventListener('click', function() {
+    document.getElementById('login-choice').style.display = 'none';
+    document.getElementById('user-login-box').style.display = 'block';
+});
+
+// Show Admin Login Form
+document.getElementById('admin-login-btn').addEventListener('click', function() {
+    document.getElementById('login-choice').style.display = 'none';
+    document.getElementById('admin-login-box').style.display = 'block';
+});
+
+// Switch to Register form
+document.getElementById('switch-to-register').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('login-choice').style.display = 'none';
+    document.getElementById('register-box').style.display = 'block';
+});
+
+// Switch back to Login choice from User Login
+document.getElementById('back-to-choice-user').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('user-login-box').style.display = 'none';
+    document.getElementById('login-choice').style.display = 'block';
+});
+
+// Switch back to Login choice from Admin Login
+document.getElementById('back-to-choice-admin').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('admin-login-box').style.display = 'none';
+    document.getElementById('login-choice').style.display = 'block';
+});
+
+// Switch back to Login choice from Register
+document.getElementById('switch-to-login').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('register-box').style.display = 'none';
+    document.getElementById('login-choice').style.display = 'block';
+});
+
+// Handle User Login form submission
+document.getElementById('user-login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('user-login-email').value;
+    const password = document.getElementById('user-login-password').value;
+
+    if (email && password) {
+        alert(`Logging in as User with email: ${email}`);
+    } else {
+        alert('Please fill in both fields.');
+    }
+});
+
+// Handle Admin Login form submission
+document.getElementById('admin-login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('admin-login-email').value;
+    const password = document.getElementById('admin-login-password').value;
+
+    if (email && password) {
+        alert(`Logging in as Admin with email: ${email}`);
+    } else {
+        alert('Please fill in both fields.');
+    }
+});
+
+// Handle Register form submission
+document.getElementById('register-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const age = document.getElementById('age').value;
+    const gender = document.getElementById('gender').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('register-email').value;
+    const password = document.getElementById('register-password').value;
+
+    if (name && age && gender && phone && email && password) {
+        alert(`Registered successfully! Welcome, ${name}`);
+    } else {
+        alert('Please fill in all fields.');
+    }
+});
+    </script>
+</body>
+</html>
