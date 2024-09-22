@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Movie Ticket Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        section {
+            margin: 2rem;
+            padding: 1rem;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .movie-card {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: #eee;
+            border-radius: 8px;
+        }
+        button {
+            padding: 0.5rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+
+    <section>
+        <h2>Manage Movies</h2>
+        <button id="add-movie-btn">Add New Movie</button>
+        <div id="movie-list">
+            <!-- Admin movie management interface will go here -->
+        </div>
+    </section>
+
+    <section>
+        <h2>Track Bookings</h2>
+        <div id="booking-list">
+            <!-- List of bookings made by users -->
+            <p>No bookings yet.</p>
+        </div>
+    </section>
+
+    <script>
+        let movies = [
+            { title: "Movie 1", showtimes: ["10:00 AM", "1:00 PM", "5:00 PM"] },
+            { title: "Movie 2", showtimes: ["11:00 AM", "2:00 PM", "6:00 PM"] }
+        ];
+
+        function displayMovies() {
+            const movieList = document.getElementById('movie-list');
+            movieList.innerHTML = '';
+
+            movies.forEach((movie, index) => {
+                let movieCard = document.createElement('div');
+                movieCard.classList.add('movie-card');
+                movieCard.innerHTML = `
+                    <h3>${movie.title}</h3>
+                    <p>Showtimes: ${movie.showtimes.join(", ")}</p>
+                    <button onclick="editMovie(${index})">Edit</button>
+                    <button onclick="deleteMovie(${index})">Delete</button>
+                `;
+                movieList.appendChild(movieCard);
+            });
+        }
+
+        function editMovie(index) {
+            const newTitle = prompt("Edit movie title:", movies[index].title);
+            const newShowtimes = prompt("Edit showtimes (comma-separated):", movies[index].showtimes.join(", "));
+            if (newTitle && newShowtimes) {
+                movies[index].title = newTitle;
+                movies[index].showtimes = newShowtimes.split(",").map(time => time.trim());
+                displayMovies();
+            }
+        }
+
+        function deleteMovie(index) {
+            if (confirm("Are you sure you want to delete this movie?")) {
+                movies.splice(index, 1);
+                displayMovies();
+            }
+        }
+
+        document.getElementById('add-movie-btn').addEventListener('click', () => {
+            const title = prompt("Enter movie title:");
+            const showtimes = prompt("Enter showtimes (comma-separated):");
+            if (title && showtimes) {
+                movies.push({
+                    title: title,
+                    showtimes: showtimes.split(",").map(time => time.trim())
+                });
+                displayMovies();
+            }
+        });
+
+        displayMovies();
+    </script>
+</body>
+</html>
